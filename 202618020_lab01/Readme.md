@@ -90,31 +90,31 @@ All generated plots are stored inside the **plots/** directory.
 
 ## Price Distribution
 
-![Price Distribution](plots/price_distribution.png)
+![Price Distribution](bookscraper/plots/price_distribution.png)
 
 ---
 
 ## Rating Distribution
 
-![Rating Distribution](plots/rating_distribution.png)
+![Rating Distribution](bookscraper/plots/rating_distribution.png)
 
 ---
 
 ## Average Price by Category
 
-![Average Price by Category](plots/avg_price_by_category.png)
+![Average Price by Category](bookscraper/plots/avg_price_by_category.png)
 
 ---
 
 ## Price vs Rating
 
-![Price vs Rating](plots/price_vs_rating.png)
+![Price vs Rating](bookscraper/plots/price_vs_rating.png)
 
 ---
 
 ## Description Word Cloud
 
-![Description Word Cloud](plots/description_wordcloud.png)
+![Description Word Cloud](bookscraper/plots/description_wordcloud.png)
 
 ---
 
