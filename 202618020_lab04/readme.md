@@ -1,8 +1,8 @@
 # DS605: Fundamentals of Machine Learning - Lab Assignment 4
 ## End-to-End Airbnb Price Prediction
 
-- **Student Name:** Akanksha Dasani
-- **Roll Number:** 202618062
+- **Student Name:** Khushboo Dharmani
+- **Roll Number:** 202618020
 - **Dataset:** [New York City Airbnb Open Data (2019)](https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data)
 
 ---
@@ -10,7 +10,7 @@
 ## 🔗 Live Deployed Application
 
 The interactive prediction web app is deployed on Streamlit Community Cloud:
-👉 **[Click here to open the Web App](https://202618062akankshadasanids605-zdrexjggc6rbza6uah3yhb.streamlit.app/)**
+👉 **[Click here to open the Web App]()** 
 
 You can test different listing scenarios across New York City boroughs (Manhattan, Brooklyn, Queens, Bronx, Staten Island) and get estimated nightly prices along with expected confidence intervals.
 
@@ -199,41 +199,6 @@ The predictions align well with actual market rates in New York City.
 4. Benchmarked 7 models, analyzed train vs test errors to check overfitting/underfitting, and tuned LightGBM with 3-fold cross validation.
 5. Saved the complete pipeline and built a user-friendly Streamlit web app deployed online.
 
-### Limitations of the System
-1. **Missing Amenities:** The dataset does not include specific amenities (such as WiFi, air conditioning, elevator, pool, washer/dryer, or balcony view). In reality, these have a large impact on whether a listing can charge a luxury rate.
-2. **Pre-Pandemic / Static Data:** The dataset is from 2019. In late 2023, New York City enacted Local Law 18, which strictly restricted short-term rentals under 30 days without the host present. The current Airbnb landscape in NYC is different from 2019.
-3. **Seasonal and Event Spikes:** The dataset represents a single snapshot without dates of stay. Holiday periods (Christmas, New Year's Eve, Marathon weekend) have much higher rates that cannot be captured without calendar date data.
 
 ---
 
-## How to Run Locally
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/dasaniakanksha22-max/202618062_AKANKSHA_DASANI_DS605.git
-cd 202618062_AKANKSHA_DASANI_DS605/202618062_LAB04
-```
-
-### 2. Set up virtual environment and install dependencies
-```bash
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-
-# macOS / Linux
-source venv/bin/activate
-
-pip install -r requirements.txt
-```
-
-### 3. Run the Streamlit app
-```bash
-streamlit run app.py
-```
-Open your browser at `http://localhost:8501`.
-
-### 4. Run tests
-```bash
-python tests/test_predictions.py
-```
