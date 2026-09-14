@@ -1,0 +1,87 @@
+{
+    "best_model": "LightGBM Regressor",
+    "best_params": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.08,
+        "n_estimators": 250,
+        "num_leaves": 45,
+        "subsample": 0.8
+    },
+    "train_metrics": {
+        "MAE ($)": 40.37,
+        "RMSE ($)": 79.39,
+        "R2 (Price)": 0.5346,
+        "R2 (Log)": 0.7168,
+        "RMSE (Log)": 0.3515
+    },
+    "test_metrics": {
+        "MAE ($)": 45.09,
+        "RMSE ($)": 87.59,
+        "R2 (Price)": 0.4501,
+        "R2 (Log)": 0.654,
+        "RMSE (Log)": 0.3926
+    },
+    "feature_count": 46,
+    "top_features": [
+        {
+            "Feature": "longitude",
+            "Importance": 1451
+        },
+        {
+            "Feature": "availability_365",
+            "Importance": 1261
+        },
+        {
+            "Feature": "reviews_per_month",
+            "Importance": 1080
+        },
+        {
+            "Feature": "latitude",
+            "Importance": 1064
+        },
+        {
+            "Feature": "dist_to_wall_st",
+            "Importance": 1037
+        },
+        {
+            "Feature": "dist_to_midtown",
+            "Importance": 967
+        },
+        {
+            "Feature": "name_length",
+            "Importance": 956
+        },
+        {
+            "Feature": "number_of_reviews",
+            "Importance": 867
+        },
+        {
+            "Feature": "minimum_nights_capped",
+            "Importance": 721
+        },
+        {
+            "Feature": "calculated_host_listings_count",
+            "Importance": 667
+        },
+        {
+            "Feature": "room_type_Private room",
+            "Importance": 175
+        },
+        {
+            "Feature": "room_type_Entire home/apt",
+            "Importance": 145
+        },
+        {
+            "Feature": "neighbourhood_grouped_Other",
+            "Importance": 64
+        },
+        {
+            "Feature": "neighbourhood_grouped_Williamsburg",
+            "Importance": 41
+        },
+        {
+            "Feature": "room_type_Shared room",
+            "Importance": 40
+        }
+    ]
+}
