@@ -22,44 +22,6 @@ In this lab assignment, our goal is to build an end-to-end machine learning syst
 
 ---
 
-## Repository Structure
-
-```
-202618062_LAB04/
-├── AB_NYC_2019.csv                  # Raw dataset (48,895 rows)
-├── New_York_City_.png               # Reference map of NYC for geospatial plots
-├── Airbnb_Price_Prediction.ipynb    # Main Jupyter Notebook with all 4 tasks and outputs
-├── app.py                           # Streamlit web application
-├── requirements.txt                 # Dependencies required to run the project
-├── README.md                        # Assignment report and instructions
-│
-├── models/
-│   ├── pipeline.joblib              # Saved scikit-learn preprocessing + LightGBM pipeline
-│   ├── model_benchmark.csv          # Evaluation metrics across all trained models
-│   ├── model_metrics.json           # Performance stats and best hyperparameters
-│   └── neighbourhood_metadata.json  # Borough and neighbourhood reference coordinates
-│
-├── reports/
-│   └── figures/                     # Plots generated during EDA and model evaluation
-│       ├── price_distribution.png
-│       ├── room_type_prices.png
-│       ├── borough_prices.png
-│       ├── nyc_map_price.png
-│       ├── correlation_matrix.png
-│       ├── model_comparison.png
-│       ├── feature_importance.png
-│       └── actual_vs_predicted_and_residuals.png
-│
-├── src/
-│   ├── preprocess.py                # Preprocessing pipeline and feature engineering
-│   ├── train.py                     # Script for training models, grid search, and saving pipeline
-│   └── eda_plots.py                 # Script that creates all visualization plots
-│
-└── tests/
-    └── test_predictions.py          # Script testing the saved pipeline on sample listings
-```
-
----
 
 ## Task 1: Data Analysis and Preparation
 
