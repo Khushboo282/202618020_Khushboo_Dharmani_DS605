@@ -17,7 +17,6 @@ from preprocess import AirbnbFeatureEngineer
 # Page Configuration
 st.set_page_config(
     page_title="NYC Airbnb Price Prediction | DS605 Lab 4",
-    page_icon="🏠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -87,8 +86,8 @@ benchmark_df = load_benchmark()
 with st.sidebar:
     st.header("Airbnb Price Estimator")
     st.write("DS605: Fundamentals of Machine Learning — Lab 4")
-    st.write("**Name:** Akanksha Dasani")
-    st.write("**Roll No:** 202618062")
+    st.write("**Name:** Khushboo Dharmani")
+    st.write("**Roll No:** 202618020")
     st.write("---")
     
     st.subheader("Sample Listing Presets")
