@@ -10,7 +10,7 @@
 ## 🔗 Live Deployed Application
 
 The interactive prediction web app is deployed on Streamlit Community Cloud:
-👉 **[Click here to open the Web App]()** 
+👉 **[Click here to open the Web App](https://atvh3pgxztr9fckmqqqn29.streamlit.app/)** 
 
 You can test different listing scenarios across New York City boroughs (Manhattan, Brooklyn, Queens, Bronx, Staten Island) and get estimated nightly prices along with expected confidence intervals.
 
