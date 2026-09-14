@@ -2,16 +2,21 @@
 Note: sandbox has 1 CPU core, so RandomForest (slow per-fit) is tuned via a lighter
 manual grid on a validation split, while HistGradientBoosting (fast per-fit) gets a
 full 5-fold RandomizedSearchCV."""
-import pandas as pd, numpy as np, time, itertools
-from sklearn.model_selection import train_test_split, RandomizedSearchCV, KFold
+from pathlib import Path
+import time
+
+import joblib
+import numpy as np
+import pandas as pd
 from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import HistGradientBoostingRegressor, RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import KFold, RandomizedSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, TargetEncoder
-from sklearn.ensemble import RandomForestRegressor, HistGradientBoostingRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import joblib
 
-df = pd.read_csv('/home/claude/airbnb-price-prediction/data/airbnb_cleaned.csv')
+ROOT = Path(__file__).resolve().parents[1]
+df = pd.read_csv(ROOT / "data" / "airbnb_cleaned.csv")
 
 feature_cols = [
     'neighbourhood_group', 'neighbourhood', 'room_type',
@@ -38,7 +43,7 @@ num_cols = [c for c in feature_cols if c not in cat_onehot + cat_target]
 
 def make_preprocessor():
     return ColumnTransformer(transformers=[
-        ('onehot', OneHotEncoder(handle_unknown='ignore'), cat_onehot),
+        ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False), cat_onehot),
         ('target_enc', TargetEncoder(random_state=42), cat_target),
         ('num', StandardScaler(), num_cols),
     ])
@@ -106,17 +111,17 @@ rf_res = evaluate("Tuned RandomForest", rf_final)
 hgb_res = evaluate("Tuned HistGB", hgb_search.best_estimator_)
 
 final_results = pd.DataFrame([rf_res, hgb_res])
-final_results.to_csv('/home/claude/airbnb-price-prediction/assets/model_comparison_tuned.csv', index=False)
+final_results.to_csv(ROOT / "assets" / "model_comparison_tuned.csv", index=False)
 
 best_name = "HistGradientBoosting" if hgb_res['r2_test'] >= rf_res['r2_test'] else "RandomForest"
 best_pipe = hgb_search.best_estimator_ if hgb_res['r2_test'] >= rf_res['r2_test'] else rf_final
 print(f"\nSelected final model: {best_name}")
 
-joblib.dump(best_pipe, '/home/claude/airbnb-price-prediction/app/airbnb_price_pipeline.pkl')
+joblib.dump(best_pipe, ROOT / "app" / "airbnb_price_pipeline.pkl")
 joblib.dump({'feature_cols': feature_cols, 'best_model': best_name,
              'best_params': (hgb_search.best_params_ if best_name=='HistGradientBoosting' else best_rf_params)},
-            '/home/claude/airbnb-price-prediction/app/model_meta.pkl')
+            ROOT / "app" / "model_meta.pkl")
 print("Saved final pipeline to app/airbnb_price_pipeline.pkl")
 
-X_test.assign(price=y_test_d.values, log_price=y_test.values).to_csv('/home/claude/airbnb-price-prediction/data/test_set.csv', index=False)
+X_test.assign(price=y_test_d.values, log_price=y_test.values).to_csv(ROOT / "data" / "test_set.csv", index=False)
 print("DONE")

@@ -7,7 +7,7 @@ An end-to-end machine learning workflow — data cleaning, feature engineering, 
 hyperparameter tuning, and a deployable Streamlit app — that predicts the nightly price of a
 NYC Airbnb listing.
 
-**Deployed app link:** _add after deploying_
+**Deployed app link:** _add after deploying to Streamlit Community Cloud_
 
 ---
 
@@ -96,14 +96,32 @@ The full pipeline (`ColumnTransformer` preprocessing + tuned `HistGradientBoosti
 saved as `app/airbnb_price_pipeline.pkl` via `joblib`, so the exact same transformations are applied
 to new inputs at inference time.
 
+## Run locally
+
+```bash
+cd 202618020_lab04
+pip install -r requirements.txt
+python scripts/save_final_pipeline.py   # creates app/airbnb_price_pipeline.pkl
+streamlit run app/app.py
+```
+
+## Deploy on Streamlit Community Cloud
+
+1. Push this lab folder (including `app/airbnb_price_pipeline.pkl` and `app/model_meta.pkl`) to GitHub.
+2. Go to [share.streamlit.io](https://share.streamlit.io), sign in with GitHub, and click **Create app**.
+3. Set:
+   - **Main file path:** `app/app.py` if this lab is the repository root, or `202618020_lab04/app/app.py` if you deploy the whole course repo.
+   - **Python packages file:** `requirements.txt` next to that lab folder (Streamlit Cloud → Advanced settings if the file is not at the repo root).
+4. Deploy, then paste the public URL here.
+
+The cloud app only needs the files under `app/` plus `requirements.txt`. Do not point Streamlit at `notebooks/` or `scripts/`.
+
 ## Task 3 — Streamlit Application
 
 `app/app.py` loads the saved pipeline and provides a form for: borough, neighbourhood
 (auto-filters + auto-fills coordinates), room type, minimum nights, review activity, host listing
 count, and availability. It returns an estimated nightly price plus a rough ± error band based on
 test-set RMSE.
-
-
 
 **Deployed app link:** _add after deploying_
 

@@ -1,4 +1,5 @@
 import json, base64
+from pathlib import Path
 
 nb = {"cells": [], "metadata": {
     "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
@@ -21,7 +22,7 @@ def img_out(path):
         b64 = base64.b64encode(f.read()).decode("ascii")
     return [{"output_type": "display_data", "data": {"image/png": b64}, "metadata": {"image/png": {"width": 900}}}]
 
-BASE = "/home/claude/airbnb-price-prediction"
+BASE = str(Path(__file__).resolve().parents[1])
 EC = [1]
 def next_ec():
     EC[0]+=1

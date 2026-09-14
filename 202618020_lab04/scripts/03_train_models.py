@@ -1,16 +1,18 @@
 """Task 2: Model training, comparison, tuning, evaluation"""
-import pandas as pd, numpy as np
-import json, time
-from sklearn.model_selection import train_test_split, RandomizedSearchCV, KFold
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
 from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import GradientBoostingRegressor, HistGradientBoostingRegressor, RandomForestRegressor
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, TargetEncoder
-from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, HistGradientBoostingRegressor
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import joblib
 
-df = pd.read_csv('/home/claude/airbnb-price-prediction/data/airbnb_cleaned.csv')
+ROOT = Path(__file__).resolve().parents[1]
+df = pd.read_csv(ROOT / "data" / "airbnb_cleaned.csv")
 
 # Features used by the model (raw, pre-engineered log columns dropped in favor of pipeline-native transforms
 # EXCEPT we keep engineered features that aren't simple scaling, e.g. dist_from_center, ratios, flags)
@@ -37,7 +39,7 @@ cat_target = ['neighbourhood']
 num_cols = [c for c in feature_cols if c not in cat_onehot + cat_target]
 
 preprocessor = ColumnTransformer(transformers=[
-    ('onehot', OneHotEncoder(handle_unknown='ignore'), cat_onehot),
+    ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False), cat_onehot),
     ('target_enc', TargetEncoder(random_state=42), cat_target),
     ('num', StandardScaler(), num_cols),
 ])
@@ -63,7 +65,7 @@ results = []
 
 models = {
     'LinearRegression': LinearRegression(),
-    'Ridge': Ridge(alpha=1.0, random_state=42),
+    'Ridge': Ridge(alpha=1.0),
     'RandomForest': RandomForestRegressor(n_estimators=200, max_depth=15, min_samples_leaf=3, random_state=42, n_jobs=-1),
     'GradientBoosting': GradientBoostingRegressor(n_estimators=200, max_depth=3, learning_rate=0.1, random_state=42),
     'HistGradientBoosting': HistGradientBoostingRegressor(max_iter=300, max_depth=6, learning_rate=0.08, random_state=42),
@@ -77,4 +79,4 @@ for name, model in models.items():
 results_df = pd.DataFrame(results).sort_values('r2_test', ascending=False)
 print("\n=== Model Comparison (sorted by test R2) ===")
 print(results_df.to_string(index=False))
-results_df.to_csv('/home/claude/airbnb-price-prediction/assets/model_comparison_baseline.csv', index=False)
+results_df.to_csv(ROOT / "assets" / "model_comparison_baseline.csv", index=False)
