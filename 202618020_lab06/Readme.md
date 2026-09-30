@@ -13,9 +13,10 @@ Turning raw images and text into numeric features, then classifying them with tr
 ├── analysis.ipynb        # full runnable notebook (Parts A, B, C + summary)
 ├── requirements.txt
 ├── README.md
-├── data/
-│   ├── asphalt/          # Asphalt Crack Dataset (Mendeley Data), 400 images
-│   └── spam/emails.csv   # Email Spam Classification Dataset (Kaggle), 5,172 rows
+├── .gitignore
+|    |-data/
+│       ├── asphalt/          # Asphalt Crack Dataset (Mendeley Data), 400 images
+│       └── spam/emails.csv   # Email Spam Classification Dataset (Kaggle), 5,172 rows
 └── results/
     ├── sample_images.png              # colour vs grayscale samples
     ├── canny_edges.png                # grayscale vs Canny edges samples
@@ -65,15 +66,6 @@ Random Forest is preferred because recall matters most (a missed crack is the co
 **Dataset note:** `emails.csv` is already a bag-of-words table (3,000 word-count columns + `Prediction`), not raw text. Each row is rebuilt into a pseudo-document by repeating each word by its count, so **word order is not preserved**. After removing empty and duplicate rows: 4,631 emails (3,170 non-spam / 1,461 spam).
 
 Cleaning: lowercase, remove `subject:`, replace URLs, keep letters only, collapse whitespace. Vectorizers are fit on the training split only.
-
-**Count vs TF-IDF** (copy the numbers from `results/text_results.csv` after running):
-
-| Vectorizer | Model | Features | Accuracy | F1 | Vectorize (s) | Train (s) | Predict (s) |
-|---|---|---|---|---|---|---|---|
-| CountVectorizer | MultinomialNB | | | | | | |
-| CountVectorizer | LogisticRegression | | | | | | |
-| TF-IDF | MultinomialNB | | | | | | |
-| TF-IDF | LogisticRegression | | | | | | |
 
 The vocabulary is 2,974 words rather than 3,000 because the default tokenizer drops one-letter tokens.
 
