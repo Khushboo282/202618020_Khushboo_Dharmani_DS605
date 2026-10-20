@@ -1,6 +1,5 @@
 # Image Representation, PCA, Eigenfaces and Face Recognition
 
-DS605 Fundamentals of Machine Learning, Lab Assignment 7
 Dataset: AT&T / ORL Database of Faces (40 subjects x 10 images, 112 x 92 grayscale)
 
 ## Approach
